@@ -1,6 +1,7 @@
 package org.sistema.hibernate.oneToOne;
 
-import org.hibernate.Session;
+import org.sistema.hibernate.oneToOne.dao.AddressDAO;
+import org.sistema.hibernate.oneToOne.dao.PersonDAO;
 import org.sistema.hibernate.oneToOne.models.Address;
 import org.sistema.hibernate.oneToOne.models.Person;
 
@@ -8,10 +9,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		Person person1 = new Person();
-		person1.setName("Persona que sera borrada");
+		person1.setName("Persona 1");
 
 		Person person2 = new Person();
-		person2.setName("Persona que permanecera");
+		person2.setName("Persona 2");
 
 		Address address1 = new Address();
 		address1.setStreet("Calle 1");
@@ -31,32 +32,23 @@ public class Main {
 		 */
 
 		Address address3 = new Address();
-		address3.setStreet("Calle de Prueba de identificadores");
+		address3.setStreet("Calle 3");
 		address3.setPostCode("21345");
 
-		/*
-		 * En la primer sesion a la base de datos almacenamos los dos objetos
-		 * Persona los objetos Direccion se almacenaran en cascada
-		 */
-
-		Session sesion = HibernateUtil.getSessionFactory().openSession();
-		sesion.beginTransaction();
-		sesion.persist(address3);
-		sesion.persist(person1);
-		sesion.persist(person2);
-		sesion.getTransaction().commit();
-		sesion.close();
-
-		/*
-		 * En la segunda sesion eliminamos el objeto persona1, la direccion1
-		 * sera borrada en cascada
-		 */
-
-		sesion = HibernateUtil.getSessionFactory().openSession();
-		sesion.beginTransaction();
-		sesion.delete(person1);
-		sesion.getTransaction().commit();
-		sesion.close();
+		AddressDAO addressDAO = new AddressDAO();
+		PersonDAO personDAO = new PersonDAO();
+		
+		//Se inserta la dirección que tendrá el ID 1
+		addressDAO.insert(address3);
+		
+		//Se insertan las personas con direcciones con el mismo ID, dichas direcciones serán
+		//almacenadas en cascada
+		personDAO.insert(person1);
+		personDAO.insert(person2);
+		
+		//Se elimina la primera persona, por lo que la dirección que tiene asociada
+		//también se eliminará en cascada.
+		personDAO.delete(person1);
 
 	}
 

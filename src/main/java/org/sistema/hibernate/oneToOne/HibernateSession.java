@@ -11,7 +11,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
  * 
  * @author Eugenia Pérez Martínez
  */
-public class HibernateUtil {
+public class HibernateSession {
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 	private static Session session;
 

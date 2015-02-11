@@ -12,7 +12,7 @@
 			</generator>
 		</id>
 		<property name="name" />
-		<one-to-one name="address" cascade="persist, delete" />
+		<one-to-one name="address" cascade="all"/>
 	</class>
 
 </hibernate-mapping>

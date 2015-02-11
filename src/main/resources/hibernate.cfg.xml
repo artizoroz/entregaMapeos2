@@ -13,8 +13,8 @@
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="connection.url">jdbc:mysql://localhost:3306/onetoone</property>
-		<property name="connection.username">test</property>
-		<property name="connection.password">test</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
 
 		<property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
 
@@ -22,12 +22,12 @@
 		<property name="current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
 
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 
 		<!-- Here comes the mapping definition - saved in resources dir with this 
 			hibernate config -->
-		<mapping resource="org/sistema/hibernate/oneToOne/mappings/Address.hbm.xml" />
-		<mapping resource="org/sistema/hibernate/oneToOne/mappings/Person.hbm.xml" />
+		<mapping resource="Address.hbm.xml" />
+		<mapping resource="Person.hbm.xml" />
 
 	</session-factory>
 
