@@ -1,29 +1,29 @@
 package org.sistema.hibernate.oneToOne;
 
-import org.sistema.hibernate.oneToOne.dao.AddressDAO;
-import org.sistema.hibernate.oneToOne.dao.PersonDAO;
-import org.sistema.hibernate.oneToOne.models.Address;
-import org.sistema.hibernate.oneToOne.models.Person;
+import org.sistema.hibernate.oneToOne.dao.AircraftDAO;
+import org.sistema.hibernate.oneToOne.dao.PilotDAO;
+import org.sistema.hibernate.oneToOne.models.Aircraft;
+import org.sistema.hibernate.oneToOne.models.Pilot;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Person person1 = new Person();
-		person1.setName("Persona 1");
+		Pilot pilot1 = new Pilot();
+		pilot1.setName("Piloto 1");
 
-		Person person2 = new Person();
-		person2.setName("Persona 2");
+		Pilot pilot2 = new Pilot();
+		pilot2.setName("Piloto 2");
 
-		Address address1 = new Address();
-		address1.setStreet("Calle 1");
-		address1.setPostCode("12345");
+		Aircraft aircraft1 = new Aircraft();
+		aircraft1.setModel("Modelo 1");
+		aircraft1.setAutonomy(12345f);
 
-		Address address2 = new Address();
-		address2.setStreet("Calle 2");
-		address2.setPostCode("54321");
+		Aircraft aircraft2 = new Aircraft();
+		aircraft2.setModel("Modelo 2");
+		aircraft2.setAutonomy(54321f);
 
-		person1.setAddress(address1);
-		person2.setAddress(address2);
+		pilot1.setAircraft(aircraft1);
+		pilot2.setAircraft(aircraft2);
 
 		/*
 		 * Esta direccion se agrega para comprobar que las personas tomen el
@@ -31,24 +31,24 @@ public class Main {
 		 * el mismo id de esta direccion)
 		 */
 
-		Address address3 = new Address();
-		address3.setStreet("Calle 3");
-		address3.setPostCode("21345");
+		Aircraft aircraft3 = new Aircraft();
+		aircraft3.setModel("Modelo 3");
+		aircraft3.setAutonomy(21345f);
 
-		AddressDAO addressDAO = new AddressDAO();
-		PersonDAO personDAO = new PersonDAO();
+		AircraftDAO aircraftDAO = new AircraftDAO();
+		PilotDAO pilotDAO = new PilotDAO();
 		
 		//Se inserta la dirección que tendrá el ID 1
-		addressDAO.insert(address3);
+		aircraftDAO.insert(aircraft3);
 		
 		//Se insertan las personas con direcciones con el mismo ID, dichas direcciones serán
 		//almacenadas en cascada
-		personDAO.insert(person1);
-		personDAO.insert(person2);
+		pilotDAO.insert(pilot1);
+		pilotDAO.insert(pilot2);
 		
 		//Se elimina la primera persona, por lo que la dirección que tiene asociada
 		//también se eliminará en cascada.
-		personDAO.delete(person1);
+		pilotDAO.delete(pilot1);
 
 	}
 

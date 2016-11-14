@@ -12,7 +12,7 @@
 		<!-- Database connection settings -->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/onetoone</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/examen2</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password"></property>
 
@@ -26,8 +26,8 @@
 
 		<!-- Here comes the mapping definition - saved in resources dir with this 
 			hibernate config -->
-		<mapping resource="Address.hbm.xml" />
-		<mapping resource="Person.hbm.xml" />
+		<mapping class="org.sistema.hibernate.oneToOne.models.Aircraft" />
+		<mapping class="org.sistema.hibernate.oneToOne.models.Pilot" />
 
 	</session-factory>
 

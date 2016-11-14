@@ -8,86 +8,81 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.sistema.hibernate.oneToOne.HibernateSession;
-import org.sistema.hibernate.oneToOne.models.Person;
+import org.sistema.hibernate.oneToOne.models.Aircraft;
 
-/**
- * implementation of personDAOInterface
- * @author Eugenia Pérez
- * @email eugenia_perez@cuatrovientos.org
- */
-public class PersonDAO implements PersonDAOInterface {
+public class AircraftDAO implements AircraftDAOInterface {
 
 	/* 
-	 * selects one person by Id
+	 * selects one Aircraft by Id
 	 * @param id
-	 * @return Person
+	 * @return Aircraft
 	 */
-	public Person selectById(Long id) {
+	public Aircraft selectById(Long id) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	 
-	    Person person = (Person) session.get(Person.class, id);
+	    Aircraft aircraft = (Aircraft) session.get(Aircraft.class, id);
 	    
 	    session.close();
-	    return person;
+	    return aircraft;
 	}
 
 	/*
-	 * retrieves all persons from db
-	 * @return List of persons
+	 * retrieves all Aircrafts from db
+	 * @return List of Aircrafts
 	 */
-	public List<Person> selectAll() {
+	public List<Aircraft> selectAll() {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	 
-	    List<Person> persons = session.createQuery("from Person").list();
+	    List<Aircraft> aircraft = session.createQuery("from Aircrafts").list();
 	    
 	    session.close();
-	    return persons;
+	    return aircraft;
 	}
 
 	/*
-	 * inserts a new person in database
-	 * person must come with the idcar set 
-	 * @param new person
+	 * inserts a new Aircraft in database
+	 * retrieves generated id and sets to Aircraft instance
+	 * @param new Aircraft
 	 */
-	public void insert(Person person) {
+	public void insert(Aircraft aircraft) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	    session.beginTransaction();
-	 
-	    session.persist(person);    
-	    
-	    session.getTransaction().commit();	         
+	
+	    session.persist(aircraft);
+	         
+	    session.getTransaction().commit();
 	    session.close();
 
 	}
 
 	/*
-	 * updates person
-	 * @param person to update
+	 * updates Aircraft
+	 * @param Aircraft to update
 	 */
-	public void update(Person person) {
+	public void update(Aircraft aircraft) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 		    Session session = sessionFactory.openSession();	 
 		    session.beginTransaction();
 		 
-		    session.merge(person); 
-		    
-		    session.getTransaction().commit();		 
+		    session.merge(aircraft);
+		 
+		    session.getTransaction().commit();
 		    session.close();
 	}
 
 	/*
-	 * delete given person
-	 * @param person to delete
+	 * delete given Aircraft
+	 * @param Aircraft to delete
 	 */
-	public void delete(Person person) {
+	public void delete(Aircraft aircraft) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();	    
 	    session.beginTransaction();
 	    
-	    session.delete(person);
+	    session.delete(aircraft);
 	 
 	    session.getTransaction().commit();
 	    session.close();

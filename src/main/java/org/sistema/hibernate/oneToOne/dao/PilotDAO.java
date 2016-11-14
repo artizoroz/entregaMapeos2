@@ -8,86 +8,82 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.sistema.hibernate.oneToOne.HibernateSession;
-import org.sistema.hibernate.oneToOne.models.Address;
+import org.sistema.hibernate.oneToOne.models.Pilot;
 
-/**
- * implementation of AddressDAOInterface
- * @author Eugenia Pérez
- * @email eugenia_perez@cuatrovientos.org
- */
-public class AddressDAO implements AddressDAOInterface {
+
+public class PilotDAO implements PilotDAOInterface {
 
 	/* 
-	 * selects one Address by Id
+	 * selects one pilot by Id
 	 * @param id
-	 * @return Address
+	 * @return Pilot
 	 */
-	public Address selectById(Long id) {
+	public Pilot selectById(Long id) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	 
-	    Address address = (Address) session.get(Address.class, id);
+	    Pilot pilot = (Pilot) session.get(Pilot.class, id);
 	    
 	    session.close();
-	    return address;
+	    return pilot;
 	}
 
 	/*
-	 * retrieves all Addresss from db
-	 * @return List of Addresss
+	 * retrieves all pilots from db
+	 * @return List of pilots
 	 */
-	public List<Address> selectAll() {
+	public List<Pilot> selectAll() {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	 
-	    List<Address> addresses = session.createQuery("from Address").list();
+	    List<Pilot> pilot = session.createQuery("from Pilot").list();
 	    
 	    session.close();
-	    return addresses;
+	    return pilot;
 	}
 
 	/*
-	 * inserts a new Address in database
-	 * retrieves generated id and sets to Address instance
-	 * @param new Address
+	 * inserts a new pilot in database
+	 * person must come with the idcar set 
+	 * @param new pilot
 	 */
-	public void insert(Address address) {
+	public void insert(Pilot pilot) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	    session.beginTransaction();
-	
-	    session.persist(address);
-	         
-	    session.getTransaction().commit();
+	 
+	    session.persist(pilot);    
+	    
+	    session.getTransaction().commit();	         
 	    session.close();
 
 	}
 
 	/*
-	 * updates Address
-	 * @param Address to update
+	 * updates pilot
+	 * @param pilot to update
 	 */
-	public void update(Address address) {
+	public void update(Pilot pilot) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 		    Session session = sessionFactory.openSession();	 
 		    session.beginTransaction();
 		 
-		    session.merge(address);
-		 
-		    session.getTransaction().commit();
+		    session.merge(pilot); 
+		    
+		    session.getTransaction().commit();		 
 		    session.close();
 	}
 
 	/*
-	 * delete given Address
-	 * @param Address to delete
+	 * delete given pilot
+	 * @param pilot to delete
 	 */
-	public void delete(Address address) {
+	public void delete(Pilot pilot) {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();	    
 	    session.beginTransaction();
 	    
-	    session.delete(address);
+	    session.delete(pilot);
 	 
 	    session.getTransaction().commit();
 	    session.close();
