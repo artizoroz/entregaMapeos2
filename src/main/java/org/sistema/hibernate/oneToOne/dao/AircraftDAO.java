@@ -35,7 +35,7 @@ public class AircraftDAO implements AircraftDAOInterface {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	 
-	    List<Aircraft> aircraft = session.createQuery("from Aircrafts").list();
+	    List<Aircraft> aircraft = session.createQuery("from aircraft").list();
 	    
 	    session.close();
 	    return aircraft;
@@ -52,6 +52,7 @@ public class AircraftDAO implements AircraftDAOInterface {
 	    session.beginTransaction();
 	
 	    session.persist(aircraft);
+	    session.save(aircraft);
 	         
 	    session.getTransaction().commit();
 	    session.close();

@@ -36,7 +36,7 @@ public class PilotDAO implements PilotDAOInterface {
 	    SessionFactory sessionFactory = HibernateSession.getSessionFactory();
 	    Session session = sessionFactory.openSession();
 	 
-	    List<Pilot> pilot = session.createQuery("from Pilot").list();
+	    List<Pilot> pilot = session.createQuery("from pilot").list();
 	    
 	    session.close();
 	    return pilot;

@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 
 
 
-@Entity
+@Entity (name = "aircraft")
 public class Aircraft {
 
 	@Id
@@ -18,7 +18,7 @@ public class Aircraft {
 	private String model;
 	private float autonomy;
 	
-	@OneToOne(cascade = { CascadeType.ALL, CascadeType.ALL })
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private Pilot pilot;
 
 	public long getId() {
